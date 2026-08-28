@@ -1,0 +1,1 @@
+// router ek express ka method hai jo tumhare path ko main file se join krta hai
