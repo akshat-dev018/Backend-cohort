@@ -2,6 +2,7 @@ const express = require("express");
 const connectDb = require("./config/db");
 const NotesModel = require("./models/notes-model");
 const createNoteController = require("./controllers/note.controller");
+const notesRoute = require("./routes/notes.route");
 
 const app = express();
 
@@ -13,8 +14,10 @@ app.get("/",(req,res)=>{
     res.send("ok got it")
 })
 
-// api for create
-app.post('/create',createNoteController)
+
+// ye mera common note hai jiske 2 children hai {create , allnotes}
+app.use('/notes',notesRoute);
+
 
 module.exports = app;
 
