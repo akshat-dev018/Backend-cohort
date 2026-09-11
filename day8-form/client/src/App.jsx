@@ -11,11 +11,15 @@ const App = () => {
     const formData = new FormData();
     formData.append("name",data.name);
     formData.append("email",data.email);
-    formData.append("profile_pic",data.images[0]);
+    for(let i =0; i<data.images.length; i++){
+    formData.append("images ",data.images[i]);
+    }
 
     console.log(data);
 
-   await axios.post('http://localhost:3000/user/create',formData)
+   await axios.post('http://localhost:3000/user/create',formData,{
+    withCredentials:true
+   })
   }
 
   return (

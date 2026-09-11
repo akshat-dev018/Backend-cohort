@@ -1,9 +1,10 @@
 const create = async (req,res)=>{
-    console.log("hello");
-    console.log(req.body);
+try {
+    const images=req.files
+    const singleImage = images.map((img)=>img)
+} catch (error) {
+    
 }
-
-
-
+}
 
 module.exports = {create};
