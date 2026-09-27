@@ -57,6 +57,12 @@ router.post("/register", async (req,res)=>{
 router.get("/me",async(req,res)=>{
     const accessToken = req.headers.authorization.split(" ")[1];
 
+    if(!accessToken){
+        return res.status(401).json({
+            message:"access token not found"
+        })
+    }
+
     try {
         const decoded = verifyAccessToken(accessToken);
 
@@ -94,11 +100,11 @@ router.post("/refresh",async(req,res)=>{
     }
 
     try {
-        const decoded = await verifyRefreshToken(refreshToken);
+        const decoded =  verifyRefreshToken(refreshToken);
 
          const user = await userModel.findById(decoded.id);
 
-         if(refreshToken!= user.refreshToken){
+         if(refreshToken!== user.refreshToken){
             user.refreshToken = null,
             await user.save()
 
